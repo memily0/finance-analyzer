@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: personal-finance-postgres
+    environment:
+      POSTGRES_DB: finance_analyzer
+      POSTGRES_USER: finance_user
+      POSTGRES_PASSWORD: finance_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: personal-finance-analyzer
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: finance_analyzer
+      DB_USERNAME: finance_user
+      DB_PASSWORD: finance_password
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:

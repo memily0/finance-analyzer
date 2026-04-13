@@ -1,1 +1,1 @@
-rootProject.name = "finance-analyzer"
+rootProject.name = "personal-finance-analyzer"
