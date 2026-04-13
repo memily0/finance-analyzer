@@ -1,6 +1,7 @@
 package com.example.financeanalyzer.entity
 
-import com.example.financeanalyzer.enums.TransactionType
+import com.example.financeanalyzer.model.Category
+import com.example.financeanalyzer.model.TransactionType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -14,7 +15,6 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.util.Locale
 
 @Entity
 @Table(name = "transactions")
@@ -36,11 +36,11 @@ data class Transaction(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val category: Locale.Category,
+    val category: Category,
 
     @Column(nullable = false)
     val description: String,
 
-    @Column(nullable = false)
+    @Column(name = "transaction_time", nullable = false)
     val timestamp: LocalDateTime
 )
